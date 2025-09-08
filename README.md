@@ -45,6 +45,7 @@ Each algorithm is evaluated under a strict evaluation budget, making efficient u
 This coursework highlights the role of optimisation in process systems engineering, demonstrating how data-driven methods can be applied to complex, nonlinear chemical processes.  
 
 📖 [See README here](cw1_ddo/part2_constrained/README.md)
+📖 [See detailed problem description here](cw1_ddo/part2_constrained/ML4CE_WO_coursework.docx)
 
 ---
 
