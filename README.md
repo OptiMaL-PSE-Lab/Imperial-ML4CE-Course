@@ -27,7 +27,7 @@ The optimisation problem involves balancing three aspects:
 
 Your algorithm should find optimal PID parameters that yield stable, efficient control of the CSTR system.  
 
-📖 [See detailed README here](cw1_ddo/part1_unconstrained/README.md)
+📖 [See README here](cw1_ddo/part1_unconstrained/README.md)
 
 ---
 
@@ -44,7 +44,7 @@ Each algorithm is evaluated under a strict evaluation budget, making efficient u
 
 This coursework highlights the role of optimisation in process systems engineering, demonstrating how data-driven methods can be applied to complex, nonlinear chemical processes.  
 
-📖 [See detailed README here](cw1_ddo/part2_constrained/README.md)
+📖 [See README here](cw1_ddo/part2_constrained/README.md)
 
 ---
 

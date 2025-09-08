@@ -1,7 +1,6 @@
 # Williams-Otto Benchmark Coursework
 
-This subfolder contains the coursework materials for the **Williams-Otto (WO) constrained optimization problem**, used to test data-driven optimization algorithms.  
-The main repo already introduces the problem—this README focuses on the provided code structure and usage.
+This subfolder contains the coursework materials for the **Williams-Otto (WO) constrained optimization problem**. The Williams and Otto continuous stirred tank reactor (CSTR) is a widely studied example, frequently used to benchmark algorithms. This process, depicted below, involves feeding the reactor with two pure component streams, Fa and Fb (consisting of components A and B, respectively). Components A and B react to form an intermediate product, C, which further reacts with another B molecule to yield the desired products, P and E. A side reaction occurs between components C and P, resulting in the formation of a byproduct, G, which has no commercial value and is considered waste.
 
 ---
 
