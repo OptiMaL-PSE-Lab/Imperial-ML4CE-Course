@@ -15,7 +15,7 @@ This repository contains the material for the coursework coding projects.
 
 The coursework is split into two parts:  
 
-### 1. Unconstrained Coursework – PID Tuning (Part 2)
+### 1. Unconstrained Coursework – PID Tuning
 
 In this project, you will design a **data-driven optimisation algorithm** to tune a PID controller for a continuous stirred tank reactor (CSTR).  
 The task is to optimise the controller gains such that the reactor system error is minimised.  
@@ -31,7 +31,7 @@ Your algorithm should find optimal PID parameters that yield stable, efficient c
 
 ---
 
-### 2. Constrained Coursework – Williams-Otto Problem (Part 3)
+### 2. Constrained Coursework – Williams-Otto Problem
 
 This project focuses on **constrained optimisation** of the **Williams-Otto (WO) chemical process**, a classic benchmark in chemical engineering.  
 The objective is to maximise the process profit by adjusting two decision variables:  
