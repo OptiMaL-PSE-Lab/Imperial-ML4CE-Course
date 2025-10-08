@@ -13,7 +13,7 @@ This repository contains the material for the coursework coding projects.
 
 ## 📂 Coursework Structure
 
-The coursework is split into two parts:  
+Currently, this repository has three parts:  
 
 ### 1. Unconstrained Coursework – PID Tuning
 
@@ -46,6 +46,23 @@ This coursework highlights the role of optimisation in process systems engineeri
 
 📖 [See README here](cw1_ddo/part2_constrained/README.md)
 📖 [See detailed problem description here](cw1_ddo/part2_constrained/ML4CE_WO_coursework.docx)
+
+### 3. Data-driven MPC 
+
+In this coursework, you will design a data-driven model predictive controller (MPC) to control a multistage extraction column. You have complete freedom to create your own data-gathering routine, data-driven model (neural network, decision tree etc.) and control horizon optimisation routine which all work together to form the controller. Since the takeaway is on optimising chemical engineering systems, we operate under the following assumption:
+-	Evaluations are expensive, meaning that the runtime of the model training is limited by a fixed evaluation budget rather than a time budget constraint. This means that your exploration routine can only evaluate the system 5 times.
+-	The data-gathering, model training and the control horizon optimisation routine will also be time limited to a budget of 2 mins for data-gathering and model training, and 5 min for controller optimisation (time to complete one simulation with the controller active)
+
+Your team’s submission will be **three** functions:
+  1. Data-gathering routine
+  2. Model training
+  3. Controller
+
+These form your best attempt at controlling the multistage extraction column system using a data-driven MPC.
+
+📖 [See README here](cw2_ddmpc/README.md)
+📖 [See detailed problem description here](cw2_ddmpc/coursework_part_3.docx)
+
 
 ---
 
