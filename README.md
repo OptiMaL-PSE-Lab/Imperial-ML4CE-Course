@@ -60,7 +60,7 @@ Your team’s submission will be **three** functions:
 
 These form your best attempt at controlling the multistage extraction column system using a data-driven MPC.
 
-📖 [See README here](cw2_ddmpc/README.md)
+📖 [See README here](cw2_ddmpc/readme.md)
 📖 [See detailed problem description here](cw2_ddmpc/coursework_part_3.docx)
 
 
