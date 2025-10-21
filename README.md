@@ -8,7 +8,7 @@ ML4CE is a module offered at **Imperial College London** for 4th Year MEng and M
 
 # 📂 Repo Structure
 
-## 1. Data-Driven Optimization (DDO)
+## 1. Data-Driven Optimization (DDO) [2023, 2024]
 
 ### Part 1: Unconstrained Optimization - PID Tuning
 
@@ -34,10 +34,9 @@ Key features:
 
 📖 [See README here](/DataDrivenOptimization/part2_constrained/README.md)  
 📖 [Benchmarking notebook](/DataDrivenOptimization/part2_constrained/ML4CE_WO_eval_algs.ipynb)  
-📖 [Problem description](/DataDrivenOptimization/part2_constrained/ML4CE_WO_coursework.docx)  
 📄 [PDF handout](/DataDrivenOptimization/part2_constrained/ML4CE_WO_coursework.pdf)
 
-## 2. Data-Driven Model Predictive Control (DDMPC)
+## 2. Data-Driven Model Predictive Control (DDMPC) [2024]
 
 Design a data-driven model predictive controller to control a multistage extraction column. This coursework emphasizes the challenges of limited data and computational resources in real chemical engineering applications.
 
@@ -48,10 +47,10 @@ Key features:
 - Submission requires three functions: data-gathering, model training, and controller
 
 📖 [See README here](/DataDrivenMPC/readme.md)  
-📖 [Problem description](/DataDrivenMPC/coursework_part_3.docx)  
+📖 [PDF Handout](/DataDrivenMPC/coursework_part_3.pdf)  
 📖 [Quick Start Notebook](/DataDrivenMPC/pc-gym/Quick_Start.ipynb)
 
-## 3. Reinforcement Learning for Inventory Management
+## 3. Reinforcement Learning for Inventory Management [2025]
 
 This coursework focuses on optimizing inventory management across a three-echelon supply chain using Reinforcement Learning (RL). The challenge is to develop efficient order-placement policies for retailers and distribution centers facing uncertain demand.
 
@@ -65,5 +64,19 @@ Key features:
 📖 [Main notebook](/ReinforcementLearning/ML4CE_RL_INV_CW.ipynb)  
 📖 [Environment specification](/ReinforcementLearning/ML4CE_RL_environment.py)
 
+
+## 4. Batch Bayesian Optimization for Bioprocess Optimization [2025]
+
+This coursework focuses on optimizing a simulated bioprocess that uses CHO cells to produce proteins. The challenge is to develop a batch Bayesian Optimization algorithm to find optimal bioprocess parameters that maximize titre concentration.
+
+Key features:
+- Design and implement a batch Bayesian Optimization algorithm
+- Optimize multiple bioprocess parameters simultaneously (temperature, pH, feed amount, cell type, etc.)
+- Deal with resource-intensive experimental simulations
+- Balance exploration and exploitation in the search for optimal parameters
+
+📖 [See README here](/BatchBayesianOptimization/README.md)  
+📖 [Main notebook](/BatchBayesianOptimization/MLCE_Coursework2025_BatchBO.ipynb)  
+📖 [PDF Handout](BatchBayesianOptimization/MLCE_Coursework_Batch_BO.pdf)
 
 ---
