@@ -28,7 +28,7 @@ class BO:
         self.time += [0]*(len(self.X_initial)-1)
         start_time = datetime.timestamp(datetime.now())
         
-        for self.iteration in range(iterations):
+        for iteration in range(self.iterations):
             random_selection = RandomSelection(self.X_searchspace, objective_func, self.batch)
             self.Y           = np.concatenate([self.Y, random_selection.random_Y])
             self.time        += [datetime.timestamp(datetime.now())-start_time]
