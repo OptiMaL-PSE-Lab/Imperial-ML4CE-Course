@@ -11,8 +11,8 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 ## Getting Started
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/OptiMaL-PSE-Lab/Imperial-ML4CE-Course/tree/batchBO_cw2025
-   cd MLCE_BOCoursework_2025
+   git clone https://github.com/OptiMaL-PSE-Lab/Imperial-ML4CE-Course
+   cd BatchBayesianOptimization
    ```
 
 2. **Install Dependencies**
