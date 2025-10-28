@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.integrate import solve_ivp
-import BayesianOptimization.conditions_data as data
+import MLCE_CWBO2025.conditions_data as data
 import pandas as pd
 
 
