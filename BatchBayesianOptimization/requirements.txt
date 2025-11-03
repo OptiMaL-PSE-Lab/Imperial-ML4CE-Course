@@ -11,7 +11,5 @@ ipython==8.22.2
 ipykernel==6.29.4
 tqdm==4.66.4
 asttokens==2.4.1
-casadi==3.6.5
-cobyqa==1.0.3
 sobol_seq==0.2.0
 pandas==2.3.3
