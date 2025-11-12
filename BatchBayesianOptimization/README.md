@@ -17,11 +17,14 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 - Make sure that your search space is within the bounds of each investigated variable. 
   
 2. How many data points am I allowed for initial data points?
-- Maximum of 6, there is no minimum.
+- Maximum of 6, there is no minimum. This does not count towards the max 15 iteration - 5 per batch limit imposed for your BO run. 
 
 3. Can I use pandas?
-- pandas is imported for the virtual lab. You should *not* include this as a part of your imports for your final submission. 
+- pandas is imported for the virtual lab. You should *not* include this as a part of your imports for your final submission.
 
+4. Can I run analysis of the search space prior to choosing my training points?
+- You are allowed to use any sampling method including random/Sobol, LHS etc. so long as the evaluation of these points are done within the BO class (such as the time spent evaluating them is captured)
+- What you are *not* allowed to do for initial training point selection is any form of statistical analysis on the search space to choose your data points. 
 
 ## Getting Started
 1. **Clone the repo:**
