@@ -10,6 +10,19 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 
 ---
 
+## ❗ IMPORTANT UPDATES
+
+1. Update to Training Point/Iteration/Batch budget constraint
+- Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point number 2. 
+
+2. Update to Marking Criteria
+- Instead of evaluating all evaluations, only evaluations from iteration 3 to 15 will be summed and compared against the cohort. Since the training points, iteration and batch budget is now fixed to 6, 15 and 5 respectively, only elements from self.Y indexed 17 and onwards (iteration 3 to 15) will be summed and compared against the cohort.
+
+3. Students are expected to code your own optimisation algorithm.
+- You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the functions.
+
+---
+
 ## ❓ FAQs
 
 1. Am I allowed to change the execution block?
