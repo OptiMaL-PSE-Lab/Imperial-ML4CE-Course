@@ -10,28 +10,37 @@ Implement your RL algorithm in [`your_algorithm.py`](algorithms/your_algorithm.p
 
 Use the notebook [`ML4CE_RL_INV_CW.ipynb`](ML4CE_RL_INV_CW.ipynb) to execute and assess the performance of your algorithm. Learning curves and reward distribution plots are provided to analyse the training process and compare your algorithm against different benchmark policies, respectively.
 
-### Key Constraints & Assumptions
+### Grading of the assignement
+- We will test the algorithm in `your_algorithm.py` on a different (potentially more challenging) environment by calling the function `your_optimization_alg(...)` multiple times with different seeds.
+- The average of these runs will be the final score.
+- **Limited evaluation budget** (per run): 
+    - max_episodes = 2000  
+    - max_time = 5 min
 
-- **Evaluation Budget**: execution will be stopped if either the maximum number of iterations or the maximum time are reached.
-- **Recommendation**: save policy parameters regularly during execution and and return the best value found when stopping criteria are met.
-- **Policy network**: do not modify the architecture of the neural network.
-
-### Submission Requirements
-
-- Rename `your_alg.py` to `CW3_your_team_name.py`
-- Ensure your algorithm respects the template
+### Submission rules
 - Use only the packages already provided in the python environment `ml4ce_rl.yml`. For more information about how to create an environment from an environment.yml file, visit [CONDA User Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file).
+- Rename `your_alg.py` to `RL_your_team_name.py`
+- Ensure your algorithm respects the template
+    - Name of the function must be `your_optimization_alg(...)` 
+    - Arguments passed to `your_optimization_alg(...)` 
+    - Outputs of `your_optimization_alg(...)` should be a dict containing the weigths of the NN and another dict with plotting data.
+- Do not modify the architecture of the neural network.
 - Remember to modify the following lines at the end of [`your_algorithm.py`](algorithms/your_algorithm.py)
 ```python
-    team_names = ["",""] # Name of each participant
-    cids = ["", ""]      # CID of each participant
-    question = [,]       # Do you want to be asked about RL in the final exam? 1: YES, 0: NO
+    team_names = ["Del Rio Chanona, Antonio","Fons, Isabela"] # Names of the team members (Imperial format)
+    cids = ["16879875", "06089513"] # CID (University Identifier)
+    question = [1,0] # Would you like to be asked about this coursework in the final exam? 1: YES, 0: NO
 ```
+
+### Recommendations
+- Save policy parameters regularly during execution and and return the best value found when stopping criteria are met.
+- Add parameters as keyword arguments with a default value.
+- If you write any auxiliary function, make sure it is contained in the submitted `.py` file.
 
 ## Project Structure
 
 ```
-cw3_rl/
+ReinforcementLearning/
 ├── ML4CE_RL_INV_CW.ipynb               # Main notebook
 ├── README.md                           # This file
 ├── algorithms/                         # Algorithm implementations
