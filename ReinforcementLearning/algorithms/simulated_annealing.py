@@ -3,17 +3,19 @@ import time
 
 import numpy as np
 import torch
-from common import PolicyNetwork, reward_fcn
 from tqdm import tqdm
+
+from common import PolicyNetwork
+from ML4CE_RL_environment import MESCEnv
 from utils import setup_model_saving
 
 
 def simulated_annealing_alg(
-    env,
-    policy_net,
+    env: MESCEnv,
+    policy_net: PolicyNetwork,
     *,
-    max_episodes=1000,
-    max_time=30,  # seconds
+    max_episodes=2000,
+    max_time=5 * 60,  # seconds
     param_min=-1.0,
     param_max=1.0,
     num_episodes_avg=10,
@@ -25,7 +27,12 @@ def simulated_annealing_alg(
     save_path = setup_model_saving(algorithm="SA")
 
     # Initialize buffers to store data for plotting
-    plot_data = {"reward_history": [], "std_history": [], "best_reward_history": []}
+    plot_data = {
+        "reward_history": [],
+        "std_history": [],
+        "best_reward_history": [],
+        "episodes": [],
+    }
 
     # Start timer
     start_time = time.time()
@@ -34,18 +41,22 @@ def simulated_annealing_alg(
     # -----------------------------------------------------------------------------------
 
     # # INITIALIZATION
-    max_iter = int(max_episodes / num_episodes_avg)
     # Parameters
     current_param = policy_net.state_dict() if NNparams_0 is None else NNparams_0
     best_param = copy.deepcopy(current_param)
     # Rewards
-    current_reward, std = reward_fcn(policy_net, env, num_episodes=num_episodes_avg)
+    current_reward, std = evaluate_avg_return(
+        policy_net, env, num_episodes=num_episodes_avg
+    )
     best_reward = copy.deepcopy(current_reward)
+    counter_episodes = num_episodes_avg
+    plot_data["episodes"].append(counter_episodes)
     plot_data["reward_history"].append(best_reward)
     plot_data["std_history"].append(std)
     plot_data["best_reward_history"].append(best_reward)
 
     # OPTIMIZATION LOOP
+    max_iter = int((max_episodes - num_episodes_avg) / num_episodes_avg)
     for i in tqdm(range(max_iter), desc="Iteration loop"):
 
         # Sample a new policy from randomly
@@ -53,7 +64,7 @@ def simulated_annealing_alg(
 
         # Evaluate the candidate policy
         policy_net.load_state_dict(candidate_param)
-        candidate_reward, std = reward_fcn(
+        candidate_reward, std = evaluate_avg_return(
             policy_net, env, num_episodes=num_episodes_avg
         )
 
@@ -75,6 +86,8 @@ def simulated_annealing_alg(
             current_reward = candidate_reward
 
         # Store the data for plotting
+        counter_episodes += num_episodes_avg
+        plot_data["episodes"].append(counter_episodes)
         plot_data["reward_history"].append(candidate_reward)
         plot_data["std_history"].append(std)
         plot_data["best_reward_history"].append(best_reward)
@@ -93,6 +106,9 @@ def simulated_annealing_alg(
     return best_param, plot_data
 
 
+#################################
+# Helper functions
+#################################
 def sample_params(params_prev, param_min, param_max):
     """
     Sample a random point in the neighborhood of a given point or value or the parameters (v). Tailored for EXPLOITATION purposes
@@ -110,3 +126,54 @@ def sample_params(params_prev, param_min, param_max):
         for k, v in params_prev.items()
     }
     return params
+
+
+def evaluate_avg_return(policy_net, env, num_episodes=10, demand=None):
+    """
+    Runs a series of episodes and computes the average total return.
+
+    Arguments:
+    - policy_net --> Neural network that predicts the optimal action given the state
+    - env --> Instance of MESCEnv environment
+    - num_episodes --> Number of runs or episodes to estimate the average return (optional, default: 10)
+    - demand --> List of scenario sets, containing realizations of customers' demand for each time step of each episode (optional, default: None)
+
+    Returns:
+    - mean_reward --> Average reward across runs
+    - std_reward --> Standard deviation across runs
+    """
+    # Input checking
+    assert num_episodes > 0, "Number of episodes must be greater than 0"
+
+    # Fix customer demand (if provided)
+    env.demand_dataset = demand
+
+    # Initialize buffer list to store results of each run
+    reward_list = []
+
+    # Run each episode and compute total undiscounted reward
+    for i in range(num_episodes):
+        # Reset environment before each episode
+        env.reset()
+        state = env.state
+        episode_terminated = False
+        # Initialize reward counter
+        total_reward = 0
+
+        while episode_terminated == False:
+            # Sample action
+            action_mean = policy_net(torch.FloatTensor(state))
+            # TODO: Add covariance matrix and sample action from MultivariateNormal distribution
+            action = np.fix(action_mean.detach().numpy())
+
+            # Interact with the environment to get reward and next state
+            state, reward, episode_terminated, _ = env.step(action)
+            total_reward += reward
+
+        reward_list.append(total_reward)
+
+    # Compute mean and standard deviation
+    mean_reward = np.mean(reward_list)
+    std_reward = np.std(reward_list)
+
+    return mean_reward, std_reward

@@ -1,18 +1,22 @@
+import copy
 import time
 
 import numpy as np
 import torch
-from common import PolicyNetwork
+import tqdm
 from tqdm import tqdm
+
+from common import PolicyNetwork
+from ML4CE_RL_environment import MESCEnv
 from utils import setup_model_saving
 
 
 def REINFORCE_alg(
-    env,
-    policy_net,
+    env: MESCEnv,
+    policy_net: PolicyNetwork,
     *,
-    max_episodes=200,
-    max_time=60.0,
+    max_episodes=2000,
+    max_time=5 * 60,  # seconds
     lr_policy_net=1e-3,
     lr_value_net=5e-3,
     discount_factor=0.99,
@@ -23,7 +27,7 @@ def REINFORCE_alg(
     save_f_path = setup_model_saving(algorithm="REINFORCE")
 
     # Initialize buffers to store data for plotting
-    plot_data = {"reward_history": [], "timesteps": []}
+    plot_data = {"reward_history": [], "episodes": []}
 
     # Start timer
     start_time = time.time()
@@ -32,7 +36,7 @@ def REINFORCE_alg(
     # -----------------------------------------------------------------------------------
 
     # Initialize variables
-    counter_timesteps = 0
+    counter_episodes = 0
     best_reward = -np.inf
     best_policy = policy_net.state_dict()
 
@@ -74,7 +78,7 @@ def REINFORCE_alg(
             trajectory["entropies"].append(entropy)
 
             state = next_state
-            counter_timesteps += 1
+        counter_episodes += 1
 
         logprobs = torch.stack(
             trajectory["logprobs"]
@@ -121,7 +125,7 @@ def REINFORCE_alg(
         # Log evolution of the total return
         total_return = round(np.mean(sum(trajectory["rewards"])), 4)
         plot_data["reward_history"].append(total_return)
-        plot_data["timesteps"].append(counter_timesteps)
+        plot_data["episodes"].append(counter_episodes)
 
         # Save best policy
         if total_return > best_reward:
