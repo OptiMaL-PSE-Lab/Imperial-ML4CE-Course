@@ -56,7 +56,7 @@ ReinforcementLearning/
 ├── ML4CE_RL_environment.py             # RL environment
 ├── common.py                           # Auxiliary functions
 ├── utils.py                            # Plotting and data management functions
-├── ml4ce_rl.yml                        # Python environment
+├── requirements.txt                    # Python environment
 └── SCstructure.png                     # Environment diagram
 ```
 
