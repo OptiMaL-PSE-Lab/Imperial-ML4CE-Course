@@ -1,80 +1,82 @@
-# Reinforcement Learning for Inventory Management
+# Machine Learning for Chemical Engineering (ML4CE)
 
-## Overview
+Welcome to the **Machine Learning for Chemical Engineering (ML4CE)** course repository. This repository contains the material for present and past coursework coding assignments.
 
-This coursework focuses on **inventory optimization using Reinforcement Learning (RL)**, in which you will have to code an optimization algorithm to identify the most effective order-placement policy.
+ML4CE is a module offered at **Imperial College London** for 4th Year MEng and MSc students in the **Chemical Engineering Department**. The course introduces students to core machine learning concepts and their applications in solving chemical engineering problems.  Assessment is based on mini-projects that apply machine learning and optimisation techniques to chemical engineering case studies.
 
-## Task
+**NOTE**: Please refer to the respective coursework's `README.md` for guidance on setting up your environment for the project. 
 
-Implement your RL algorithm in [`your_algorithm.py`](algorithms/your_algorithm.py). You have complete freedom in the choice of the optimization algorithm but, please, respect the template to ensure compliance with the evaluation platform we will use for grading the assignement.
+# 📂 Repo Structure
 
-Use the notebook [`ML4CE_RL_INV_CW.ipynb`](ML4CE_RL_INV_CW.ipynb) to execute and assess the performance of your algorithm. Learning curves and reward distribution plots are provided to analyse the training process and compare your algorithm against different benchmark policies, respectively.
+## 1. Data-Driven Optimization (DDO) [2023, 2024]
 
-### Key Constraints & Assumptions
+### Part 1: Unconstrained Optimization - PID Tuning
 
-- **Evaluation Budget**: your algorithm can interact with the RL environment for a limited number of episodes (´max_episodes=200´).
-- **Recommendation**: save policy parameters regularly during execution and and return the best value found when stopping criteria are met.
-- **Policy network**: do not modify the architecture of the neural network.
+In this project, you will design a **data-driven optimisation algorithm** to tune a PID controller for a Continuous Stirred-Tank Reactor (CSTR). The optimization involves a 32-dimensional space (PID controller gains) with the objective to minimize control error.
 
-### Submission Requirements
+Key features:
+- Freedom to implement any DDO algorithm: direct, model-based, evolutionary search, etc.
+- Limited by fixed evaluation budget (100 function evaluations)
+- Challenge: balance overall tracking error, control action magnitude, and action smoothness
 
-- Rename `your_alg.py` to `RL_your_team_name.py`
-- Ensure your algorithm respects the template
-- Use only the packages already provided in the python environment `ml4ce_rl.yml`. For more information about how to create an environment from an environment.yml file, visit [CONDA User Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file).
-- Remember to modify the following lines at the end of [`your_algorithm.py`](algorithms/your_algorithm.py)
-```python
-    team_names = ["Del Rio Chanona, Antonio","Fons, Isabela"] # Names of the team members (Imperial format)
-    cids = ["16879875", "06089513"] # CID (University Identifier)
-    question = [1,0] # Would you like to be asked about this coursework in the final exam? 1: YES, 0: NO
-```
+📖 [See README here](/DataDrivenOptimization/part1_unconstrained/README.md)  
+📖 [Main benchmarking notebook](/DataDrivenOptimization/part1_unconstrained/ML4CE_CSTR_PID_CW.ipynb)  
+📄 [PDF handout](/DataDrivenOptimization/part1_unconstrained/Coursework%20DDO%20Part%202.pdf)
 
-## Project Structure
+### Part 2: Constrained Optimization - Williams-Otto Problem
 
-```
-ReinforcementLearning/
-├── ML4CE_RL_INV_CW.ipynb               # Main notebook
-├── README.md                           # This file
-├── algorithms/                         # Algorithm implementations
-│   ├── __init__.py
-│   ├── reinforce.py                    # REINFORCE with baseline
-│   ├── simulated_annealing.py          # Simulated Annealing (SA) algorithm
-│   ├── heuristic_policy.py             # Heuristic (s,S) policy
-│   └── your_algorithm.py               # Your algorithm template
-├── benchmarking/                       # Auxiliary files for performance evaluation
-│   ├── policy_REINFORCE_with_baseline.py     # Pretrained policy using REINFORCE with baseline
-│   ├── policy_SA.py                    # Pretrained policy using SA
-│   └── test_demand_dataset.pickle      # Test dataset
-├── ML4CE_RL_environment.py             # RL environment
-├── common.py                           # Auxiliary functions
-├── utils.py                            # Plotting and data management functions
-├── ml4ce_rl.yml                        # Python environment
-└── SCstructure.png                     # Environment diagram
-```
+This project focuses on **constrained optimisation** of the classic **Williams-Otto (WO)** chemical process benchmark. The objective is to maximize process profit by adjusting two decision variables while respecting process constraints.
 
-## RL Environment
-This project focuses on the three-echelon supply chain depicted below.
-<p align="center">
-  <img src=".\SCstructure.png" alt="SupplyChainStructure" width="500"/>
-</p>
+Key features:
+- Optimize reactor temperature (T<sub>R</sub>) and reactant B flow rate (F<sub>b</sub>)
+- Work within constraints on reactant A usage and waste generation
+- Limited evaluation budget makes efficient simulation use critical
 
-### Description
-The **supplier** is an olive oil producer company, whose bottles are sold in different stores around the city. Due to the distance between the production facilities and the stores, the company owns a **distribution centre (DC)** in the vicinity of the city. **Retailers** sell the product directly to the customers and place replenishment orders to maintain sufficient stock levels. Likewise, the DC must keep enough inventory level to supply the stores and places replenishment orders directly to the manufacturing company. The challenge is to develop a re-order policy for each participant, since each stage faces uncertain in the demand of the stage succeeding it.
+📖 [See README here](/DataDrivenOptimization/part2_constrained/README.md)  
+📖 [Benchmarking notebook](/DataDrivenOptimization/part2_constrained/ML4CE_WO_eval_algs.ipynb)  
+📄 [PDF handout](/DataDrivenOptimization/part2_constrained/ML4CE_WO_coursework.pdf)
 
-### Assumptions
-- Customer demand is modeled as a random variable following a Poisson distribution.
-- Production facilities have immediate access to an unlimited supply of raw materials.
+## 2. Data-Driven Model Predictive Control (DDMPC) [2024]
 
-### What happens during an episode?
-Considering a time horizon of 4 weeks, at each day or time step $t$:
-1.  DC and retailers place replenishment orders.
-2.  DC and retailers receive orders after the corresponding lead time from their respective suppliers and update both inventory on-hand and pipeline inventory.
-3.  Each stage satisfies demand of their respective clients according to current inventory levels. 
-    1.  Backlogged sales take priority over the orders arriving at current period $t$.
-    2.  Then, the orders placed by the retailers at the current period are fulfilled with the remaining available inventory.
-    3.  Finally, the backlog of each retailer is updated.
-4.  Profit is evaluated as the difference between the sales revenue and the different costs across the entire supply chain (i.e., delivery fees, variable order costs, holding cost, unfulfilled demand penalties and excess capacity cost).
+Design a data-driven model predictive controller to control a multistage extraction column. This coursework emphasizes the challenges of limited data and computational resources in real chemical engineering applications.
 
-### Elements of the Markov Decision Process (MDP)
-* **Action space:** the agent must decide the number of units each retailer or DC reorders at each time step.
-* **State space:** states represent the inventory position at each time step, which is the difference between the total inventory and the backlog.
-* **Reward:** the agent tries to maximize the profit of the supply chain.
+Key features:
+- Create custom data-gathering routine, data-driven model, and control horizon optimization
+- Limited to just 5 system evaluations for exploration
+- Time-limited budgets: 2 minutes for data-gathering/model training, 5 minutes for controller simulation
+- Submission requires three functions: data-gathering, model training, and controller
+
+📖 [See README here](/DataDrivenMPC/readme.md)  
+📖 [PDF Handout](/DataDrivenMPC/coursework_part_3.pdf)  
+📖 [Quick Start Notebook](/DataDrivenMPC/pc-gym/Quick_Start.ipynb)
+
+## 3. Reinforcement Learning for Inventory Management [2025]
+
+This coursework focuses on optimizing inventory management across a three-echelon supply chain using Reinforcement Learning (RL). The challenge is to develop efficient order-placement policies for retailers and distribution centers facing uncertain demand.
+
+Key features:
+- Complete freedom to implement any RL algorithm within the provided template
+- Supply chain includes supplier, distribution center, and retailers
+- Goal: Maximize profit while balancing inventory costs, backlog penalties, and delivery fees
+- Benchmark against REINFORCE with baseline and simulated annealing algorithms
+
+📖 [See README here](/ReinforcementLearning/README.md)  
+📖 [Main notebook](/ReinforcementLearning/ML4CE_RL_INV_CW.ipynb)  
+📖 [Environment specification](/ReinforcementLearning/ML4CE_RL_environment.py)
+
+
+## 4. Batch Bayesian Optimization for Bioprocess Optimization [2025]
+
+This coursework focuses on optimizing a simulated bioprocess that uses CHO cells to produce proteins. The challenge is to develop a batch Bayesian Optimization algorithm to find optimal bioprocess parameters that maximize titre concentration.
+
+Key features:
+- Design and implement a batch Bayesian Optimization algorithm
+- Optimize multiple bioprocess parameters simultaneously (temperature, pH, feed amount, cell type, etc.)
+- Deal with resource-intensive experimental simulations
+- Balance exploration and exploitation in the search for optimal parameters
+
+📖 [See README here](/BatchBayesianOptimization/README.md)  
+📖 [Main notebook](/BatchBayesianOptimization/MLCE_Coursework2025_BatchBO.ipynb)  
+📖 [PDF Handout](BatchBayesianOptimization/MLCE_Coursework_Batch_BO.pdf)
+
+---
