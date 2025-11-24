@@ -14,7 +14,7 @@ Use the notebook [`ML4CE_RL_INV_CW.ipynb`](ML4CE_RL_INV_CW.ipynb) to execute and
 - We will test the algorithm in `your_algorithm.py` on a different (potentially more challenging) environment by calling the function `your_optimization_alg(...)` multiple times with different seeds.
 - The average of these runs will be the final score.
 - **Limited evaluation budget** (per run): 
-    - max_episodes = 2000  
+    - max_episodes = 5000  
     - max_time = 5 min
 
 ### Submission rules
