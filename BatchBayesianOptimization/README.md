@@ -12,14 +12,27 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 
 ## ❗ IMPORTANT UPDATES
 
-1. Update to Training Point/Iteration/Batch budget constraint
-- Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point number 2. 
+### A. Updated Marking Procedure for Batch Bayesian Optimization Coursework
+We have now updated the marking criteria. The marking will be based on the best function value you have discovered so far, starting from Batch 3 onwards.
+How the marking works:
 
-2. Update to Marking Criteria
-- Instead of evaluating all evaluations, only evaluations from iteration 3 to 15 will be summed and compared against the cohort. Since the training points, iteration and batch budget is now fixed to 6, 15 and 5 respectively, only elements from self.Y indexed 17 and onwards (iteration 3 to 15) will be summed and compared against the cohort.
+- Initialization + Batches 1 and 2 (first 16 evaluations):These do not contribute to your mark. Their purpose is purely for initialization and early exploration.
+- Batch 3: After you submit the five evaluations from Batch 3, We will look at all evaluations so far (16 from earlier batches + 5 from Batch 3). Your score for Batch 3 will be the highest single function value among all these points.
+- Batch 4: You submit five new samples. We evaluate them, and then consider all evaluations to date (16 + 5 + 5). Your score for Batch 4 will again be the best function value found so far, even if that point was found in an earlier batch.
+- Batch 5-onwards: Same procedure: you submit five new points, they are evaluated, and we take the best value so far as your Batch score. At the end we add your scores for each batch, and this is your final score. If your algorithm stops before finishing all interactions due to time, we take your highest evaluation and use that for the missing batches.
 
-3. Students are expected to code your own optimisation algorithm.
-- You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the functions.
+##### What this means for you:
+- Your algorithm can explore: exploratory samples will not penalize you, since the score is based on the best-so-far value.
+- The marking is such that:
+- Algorithms that find good points early will be rewarded.
+- Algorithms that achieve high values in general will also be rewarded.
+- Your score for each assessed batch is simply: the highest evaluation value your algorithm has achieved up to that point.
+
+### B. Update to Training Point/Iteration/Batch budget constraint
+- Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point A. 
+
+### C. Students are expected to code your own BO optimisation algorithm.
+- You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the functions and you must code a BO optimizer/algorithm.
 
 ---
 
