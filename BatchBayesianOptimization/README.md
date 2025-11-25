@@ -33,6 +33,7 @@ How the marking works:
 
 ### C. Students are expected to code your own BO optimisation algorithm.
 - You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the functions and you must code a BO optimizer/algorithm.
+- The only instance where you are allowed scipy.optimize.minimize is for obtaining your hyperparameters via optimisationof the log marginal likelihood. 
 
 ---
 
