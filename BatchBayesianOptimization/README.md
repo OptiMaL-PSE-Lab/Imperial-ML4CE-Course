@@ -32,8 +32,8 @@ How the marking works:
 - Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point A. 
 
 ### C. Students are expected to code your own BO optimisation algorithm.
-- You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the functions and you must code a BO optimizer/algorithm.
-- The only instance where you are allowed scipy.optimize.minimize is for obtaining your hyperparameters via optimisationof the log marginal likelihood. 
+- You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the objective function and you must code a BO optimizer/algorithm.
+- The only instance where you are allowed scipy.optimize.minimize/other pre-built optimizers is for obtaining your hyperparameters via the log marginal likelihood. 
 
 ---
 
