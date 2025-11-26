@@ -12,7 +12,10 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 
 ## ❗ IMPORTANT UPDATES
 
-### A. Updated Marking Procedure for Batch Bayesian Optimization Coursework
+### A. Change in Coursework Optimizer. 
+We have now updated the required optimizer. Instead of only batch BO, you are now able to use any and all data-driven methods or optimizers learnt from your course. However, you must still adhere to the 6 initialisation points + 75 total evaluation constraint. You must code this in its entirety unless when optimising for hyperparameters. (see point D). The marking criteria is based on the 'batch' approach - see point B. This gives leaway for some exploration. 
+
+### B. Updated Marking Procedure for Data-Driven Optimization Coursework
 We have now updated the marking criteria. The marking will be based on the best function value you have discovered so far, starting from Batch 3 onwards.
 How the marking works:
 
@@ -28,10 +31,10 @@ How the marking works:
 - Algorithms that achieve high values in general will also be rewarded.
 - Your score for each assessed batch is simply: the highest evaluation value your algorithm has achieved up to that point.
 
-### B. Update to Training Point/Iteration/Batch budget constraint
+### C. Update to Training Point/Iteration/Batch budget constraint
 - Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point A. 
 
-### C. Students are expected to code your own BO optimisation algorithm.
+### D. Students are expected to code your own BO optimisation algorithm.
 - You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the objective function and you must code a BO optimizer/algorithm.
 - The only instance where you are allowed scipy.optimize.minimize/other pre-built optimizers is for obtaining your hyperparameters via the log marginal likelihood. 
 
