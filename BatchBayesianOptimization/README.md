@@ -32,11 +32,11 @@ How the marking works:
 - Your score for each assessed batch is simply: the highest evaluation value your algorithm has achieved up to that point.
 
 ### C. Update to Training Point/Iteration/Batch budget constraint
-- Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point A. 
+- Instead of a maximum ceiling, we now impose a strict constant budget of 6 Training points, 15 iterations and 5 per batch constraint. The change is prompted by the change in marking criteria - see point A and B. 
 
-### D. Students are expected to code your own BO optimisation algorithm.
+### D. Students are expected to code your own optimisation algorithm.
 - You are *not* allowed to use pre-built algorithms or external packages that directly evaluate or optimise the objective function and you must code a BO optimizer/algorithm.
-- The only instance where you are allowed scipy.optimize.minimize/other pre-built optimizers is for obtaining your hyperparameters via the log marginal likelihood. 
+- The only instance where you are allowed scipy.optimize.minimize/other pre-built optimizers is for obtaining your hyperparameters. 
 
 ---
 
