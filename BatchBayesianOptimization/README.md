@@ -13,7 +13,9 @@ This coursework involves the optimisation of a simulated bioprocess at process s
 ## ❗ IMPORTANT UPDATES
 
 ### A. Change in Coursework Optimizer. 
-We have now updated the required optimizer. Instead of only batch BO, you are now able to use any and all data-driven methods or optimizers learnt from your course. However, you must still adhere to the 6 initialisation points + 75 total evaluation constraint. You must code this in its entirety unless when optimising for hyperparameters. (see point D). The marking criteria is based on the 'batch' approach - see point B. This gives leaway for some exploration. 
+We have now updated the required optimizer. Instead of only batch BO, you are now able to use any and all data-driven methods or optimizers learnt from your course. However, you must still adhere to the 6 initialisation points + (15 rounds x 5 per batch) total evaluation constraint. You must code this in its entirety unless when optimising for hyperparameters. (see point D). The marking criteria is based on the 'batch' approach - see point B. This gives leaway for some exploration. 
+
+*Emphasis: You are only allowed to query the objective function 15 times in line with the 15 rounds of optimisation (with maximum input and output size of 5 in line with the max batch number). See FAQ point 5 for use of sequential BO (or other sequential optimizers).
 
 ### B. Updated Marking Procedure for Data-Driven Optimization Coursework
 We have now updated the marking criteria. The marking will be based on the best function value you have discovered so far, starting from Batch 3 onwards.
@@ -54,7 +56,10 @@ How the marking works:
 
 4. Can I run analysis of the search space prior to choosing my training points?
 - You are allowed to use any sampling method including random/Sobol, LHS etc. so long as the evaluation of these points are done within the BO class (such as the time spent evaluating them is captured)
-- What you are *not* allowed to do for initial training point selection is any form of statistical analysis on the search space to choose your data points. 
+- What you are *not* allowed to do for initial training point selection is any form of statistical analysis on the search space to choose your data points.
+
+5. Can I use sequential BO for the coursework?
+- Yes. However, you can only query the objective function 15 times - meaning you will only have a total of 15 evaluated points if only sequential BO is used. The recommendation is to use the maximum batch size to hit 75 total evaluations. 
 
 ## Getting Started
 1. **Clone the repo:**
